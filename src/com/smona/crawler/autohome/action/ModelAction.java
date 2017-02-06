@@ -11,9 +11,19 @@ import com.smona.crawler.autohome.util.Debug;
 //车型
 public class ModelAction implements IAction {
 	private String mUrl = null;
+	private int mBrandId = -1;
+	private int mSeriesId = -1;
 
-	public ModelAction(String url) {
-		mUrl = url;
+	public void setUrl(String mUrl) {
+		this.mUrl = mUrl;
+	}
+
+	public void setBrandId(int brandId) {
+		this.mBrandId = brandId;
+	}
+
+	public void setSeriesId(int seriesId) {
+		this.mSeriesId = seriesId;
 	}
 
 	public void execute() {
@@ -39,7 +49,8 @@ public class ModelAction implements IAction {
 
 	private void processModel(Elements script) {
 		if (Debug.MODEL_DEBUG) {
-			System.out.println("=========================ModelAction====start=====================");
+			System.out
+					.println("=========================ModelAction====start=====================");
 		}
 		for (Element element : script) {
 			// 切割js中的var
@@ -71,7 +82,8 @@ public class ModelAction implements IAction {
 			}
 		}
 		if (Debug.MODEL_DEBUG) {
-			System.out.println("=========================ModelAction====end====================");
+			System.out
+					.println("=========================ModelAction====end====================");
 		}
 	}
 }
