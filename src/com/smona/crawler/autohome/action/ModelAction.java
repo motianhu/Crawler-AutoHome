@@ -6,6 +6,12 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import com.smona.crawler.autohome.http.HttpClient;
+import com.smona.crawler.autohome.json.JsonUtils;
+import com.smona.crawler.autohome.model.response.ResultModular;
+import com.smona.crawler.autohome.model.response.bag.BagResponse;
+import com.smona.crawler.autohome.model.response.color.ColorResponse;
+import com.smona.crawler.autohome.model.response.config.ConfigResponse;
+import com.smona.crawler.autohome.model.response.option.OptionResponse;
 import com.smona.crawler.autohome.util.Debug;
 
 //车型
@@ -49,8 +55,7 @@ public class ModelAction implements IAction {
 
 	private void processModel(Elements script) {
 		if (Debug.MODEL_DEBUG) {
-			System.out
-					.println("=========================ModelAction====start=====================");
+			System.out.println("=========================ModelAction====start=====================");
 		}
 		for (Element element : script) {
 			// 切割js中的var
@@ -59,31 +64,42 @@ public class ModelAction implements IAction {
 				if (variable.contains("=")) {
 					if (variable.contains("config = {")) {
 						String[] kvp = variable.split("=");
+						String content = kvp[1].trim().replace(";", "");
 						if (Debug.MODEL_DEBUG) {
-							System.out.println(kvp[1].trim());
+							System.out.println(content);
 						}
+						ResultModular<ConfigResponse> config = JsonUtils.parseJson(content, ResultModular.class);
+						//System.out.println(config);
 					} else if (variable.contains("option = {")) {
 						String[] kvp = variable.split("=");
+						String content = kvp[1].trim().replace(";", "");
 						if (Debug.MODEL_DEBUG) {
-							System.out.println(kvp[1].trim());
+							System.out.println(content);
 						}
+						ResultModular<OptionResponse> option = JsonUtils.parseJson(content, ResultModular.class);
+//						System.out.println(option);
 					} else if (variable.contains("color = {")) {
 						String[] kvp = variable.split("=");
+						String content = kvp[1].trim().replace(";", "");
 						if (Debug.MODEL_DEBUG) {
-							System.out.println(kvp[1].trim());
+							System.out.println(content);
 						}
+						ResultModular<ColorResponse> color = JsonUtils.parseJson(content, ResultModular.class);
+//						System.out.println(color);
 					} else if (variable.contains("bag = {")) {
 						String[] kvp = variable.split("=");
+						String content = kvp[1].trim().replace(";", "");
 						if (Debug.MODEL_DEBUG) {
-							System.out.println(kvp[1].trim());
+							System.out.println(content);
 						}
+						ResultModular<BagResponse> bag = JsonUtils.parseJson(content, ResultModular.class);
+//						System.out.println(bag);
 					}
 				}
 			}
 		}
 		if (Debug.MODEL_DEBUG) {
-			System.out
-					.println("=========================ModelAction====end====================");
+			System.out.println("=========================ModelAction====end====================");
 		}
 	}
 }

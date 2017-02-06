@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import com.smona.crawler.autohome.util.Debug;
+
 public class DBOperater {
 	private static final String name = "com.mysql.jdbc.Driver";
 	private static final String url = "jdbc:mysql://localhost/crawler";
@@ -16,6 +18,9 @@ public class DBOperater {
 	private Statement mStmt = null;
 
 	public void onCreate() {
+		if(Debug.DB_CLOSE_DEBUG) {
+			return;
+		}
 		Connection conn = null;
 		try {
 			Class.forName(name);
@@ -27,6 +32,9 @@ public class DBOperater {
 	}
 
 	public void onDestory() {
+		if(Debug.DB_CLOSE_DEBUG) {
+			return;
+		}
 		if (mConn != null) {
 			try {
 				mConn.close();
@@ -45,6 +53,9 @@ public class DBOperater {
 	}
 
 	public Object executeTask(String sql) {
+		if(Debug.DB_CLOSE_DEBUG) {
+			return null;
+		}
 		try {
 			ResultSet set = mStmt.executeQuery(sql);
 			return set;

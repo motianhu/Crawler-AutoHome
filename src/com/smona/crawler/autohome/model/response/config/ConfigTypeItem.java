@@ -6,5 +6,5 @@ import com.smona.crawler.autohome.model.response.ParamItem;
 
 public class ConfigTypeItem {
 	public String name;
-	public List<ParamItem> configitems;
+	public List<ParamItem> paramitems;
 }

@@ -7,5 +7,5 @@ import com.smona.crawler.autohome.model.response.SpecItem;
 public class ConfigResponse {
 	public int specid;
 	public List<SpecItem> specsList;
-	public List<ConfigTypeItem> configtypeitems;
+	public List<ConfigTypeItem> paramtypeitems;
 }
